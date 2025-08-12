@@ -4,15 +4,9 @@ Bu proje, mikroservis mimarisi kullanarak geliştirilmiş bir e-ticaret sistemi 
 
 ## 🏗️ Proje Mimarisi
 
-![KrakenD API Gateway Architecture](https://github.com/Muhammederendemir/spring-boot-krakend-api-gateway/blob/main/image/krakenD-api-gateway.png)
+![KrakenD API Gateway Architecture](https://raw.githubusercontent.com/Muhammederendemir/spring-boot-krakend-api-gateway/main/image/krakenD-api-gateway.png)
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   KrakenD       │    │   User Service  │    │ Product Service │
-│   API Gateway   │◄──►│   (Port: 8080)  │    │  (Port: 8081)   │
-│   (Port: 8000)  │    │                 │    │                 │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
+
 
 ## 📋 Teknolojiler
 
