@@ -1,0 +1,70 @@
+{
+  "$schema": "https://www.krakend.io/schema/v3.json",
+  "version": 3,
+  "name": "Spring Boot API Gateway",
+  "port": 8000,
+  "extra_config": {
+    "router": {
+      "logger_skip_paths": [
+        "/__health",
+        "/favicon.ico"
+      ]
+    }
+  },
+  "endpoints": [
+    {
+      "endpoint": "/api/users",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/users",
+          "host": [
+            "http://users-service:8080"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/products",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/products",
+          "host": [
+            "http://products-service:8081"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/dashboard",
+      "method": "GET",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5,
+          "every": "1m"
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/api/users",
+          "host": [
+            "http://users-service:8080"
+          ],
+          "group": "users",
+          "is_collection": true
+        },
+        {
+          "url_pattern": "/api/products",
+          "host": [
+            "http://products-service:8081"
+          ],
+          "group": "products",
+          "is_collection": true
+        }
+      ]
+    }
+  ]
+}

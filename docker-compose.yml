@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  users-service:
+    build: ./spring-boot-user-service
+    ports:
+      - "8080:8080"
+
+  products-service:
+    build: ./spring-boot-product-service
+    ports:
+      - "8081:8081"
+
+  krakend:
+    image: devopsfaith/krakend
+    container_name: krakend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./krakend.json:/etc/krakend/krakend.json
+    depends_on:
+      - users-service
+      - products-service
